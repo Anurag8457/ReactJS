@@ -1,5 +1,4 @@
 
-
 import KPICard from "../components/cards/KPICards";
 
 import DriftTrendChart from "../components/charts/DriftTrendChart";
@@ -97,3 +96,6 @@ export default function Dashboard() {
     </div>
   );
 }
+
+
+
