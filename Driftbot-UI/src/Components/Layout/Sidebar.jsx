@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import PlayCircleIcon from "@mui/icons-material/PlayCircle";
 import DescriptionIcon from "@mui/icons-material/Description";
@@ -12,36 +14,46 @@ import {
   ListItemButton,
   ListItemIcon,
   ListItemText,
+  Toolbar,
 } from "@mui/material";
+
+const drawerWidth = 260;
 
 const menuItems = [
   {
     text: "Dashboard",
     icon: <DashboardIcon />,
+    path: "/",
   },
   {
     text: "Run Scan",
     icon: <PlayCircleIcon />,
+    path: "/run-scan",
   },
   {
     text: "Drift Reports",
     icon: <DescriptionIcon />,
+    path: "/reports",
   },
   {
     text: "Environments",
     icon: <StorageIcon />,
+    path: "/environment",
   },
   {
     text: "AI Insights",
     icon: <PsychologyIcon />,
+    path: "/ai-insights",
   },
   {
     text: "Governance",
     icon: <SecurityIcon />,
+    path: "/governance",
   },
   {
     text: "Settings",
     icon: <SettingsIcon />,
+    path: "/settings",
   },
 ];
 
@@ -50,26 +62,36 @@ export default function Sidebar() {
     <Drawer
       variant="permanent"
       sx={{
-        width: 260,
+        width: drawerWidth,
         flexShrink: 0,
+        "& .MuiDrawer-paper": {
+          width: drawerWidth,
+          boxSizing: "border-box",
+        },
       }}
     >
-      <div className="h-20 flex items-center justify-center">
-        <h1 className="text-4xl font-bold text-orange-500">
+      <Toolbar>
+        <h2
+          style={{
+            fontWeight: "bold",
+            color: "#f97316",
+            fontSize: "24px",
+          }}
+        >
           DriftBot
-        </h1>
-      </div>
+        </h2>
+      </Toolbar>
 
       <List>
         {menuItems.map((item) => (
-          <ListItemButton key={item.text}>
-            <ListItemIcon>
-              {item.icon}
-            </ListItemIcon>
+          <ListItemButton
+            key={item.text}
+            component={Link}
+            to={item.path}
+          >
+            <ListItemIcon>{item.icon}</ListItemIcon>
 
-            <ListItemText
-              primary={item.text}
-            />
+            <ListItemText primary={item.text} />
           </ListItemButton>
         ))}
       </List>
