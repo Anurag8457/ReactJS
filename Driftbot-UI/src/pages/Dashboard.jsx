@@ -10,7 +10,9 @@ import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 
 import { Card } from "@mui/material";
-
+<div className="bg-red-500 text-white p-5">
+  Tailwind Test
+</div>
 export default function Dashboard() {
   return (
     <div>

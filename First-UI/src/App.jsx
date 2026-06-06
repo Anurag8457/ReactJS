@@ -6,10 +6,10 @@ const App = () => {
   return(
     <div>
       <Section1/>
-      <Section2/>
+      {/* <Section2/> */}
     </div>
   )
 }
-1
+
 
 export default App;

@@ -1,15 +1,13 @@
 import React from 'react'
-import Rightcontent from './Right_content'
-import Left_text from './Left_text'
+import Right_content from './Right_content'
+import Left_content from './Left_content'
 
 const Page1Content = () => {
   return (
-    <div className='bg-blue-100 py-100 flex items-center justify-between '>
-        <Left_text/>
-        <Rightcontent/>
-
-
-    </div> 
+    <div className='h-full flex items-center justify-between'>
+      <Left_content />
+      <Right_content />
+    </div>
   )
 }
 

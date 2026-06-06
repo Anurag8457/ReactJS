@@ -1,27 +1,25 @@
 import { Outlet } from "react-router-dom";
+import { Box } from "@mui/material";
 import Sidebar from "./Sidebar";
 import Header from "./Header";
 
-
-
 export default function MainLayout() {
   return (
-    <div style={{ display: "flex" }} >
+    <Box sx={{ display: "flex" }}>
       <Sidebar />
 
-      <div
-        style={{
-          marginLeft: `${drawerWidth}px`,
-          width: `calc(100% - ${drawerWidth}px)`,
+      <Box
+        component="main"
+        sx={{
+          flexGrow: 1,
+          minHeight: "100vh",
+          backgroundColor: "#f5f5f5",
+          p: 3,
         }}
       >
         <Header />
-
-        <main style={{ padding: "24px" }}>
-          <Outlet />
-        </main>
-      </div>
-    </div>
+        <Outlet />
+      </Box>
+    </Box>
   );
 }
-

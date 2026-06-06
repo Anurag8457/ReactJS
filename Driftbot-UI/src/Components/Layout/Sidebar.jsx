@@ -7,7 +7,7 @@ import StorageIcon from "@mui/icons-material/Storage";
 import PsychologyIcon from "@mui/icons-material/Psychology";
 import SecurityIcon from "@mui/icons-material/Security";
 import SettingsIcon from "@mui/icons-material/Settings";
-
+export const drawerWidth = 260;
 import {
   Drawer,
   List,
@@ -17,7 +17,7 @@ import {
   Toolbar,
 } from "@mui/material";
 
-const drawerWidth = 260;
+
 
 const menuItems = [
   {
@@ -78,7 +78,7 @@ export default function Sidebar() {
             fontSize: "24px",
           }}
         >
-          DriftBot
+          DriftBotū
         </h2>
       </Toolbar>
 
