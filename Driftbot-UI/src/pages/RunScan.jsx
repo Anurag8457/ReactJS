@@ -1,6 +1,3 @@
-
-
-
 import {
   Card,
   Button,
@@ -12,7 +9,6 @@ import {
 } from "@mui/material";
 
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
-import AccessTimeIcon from "@mui/icons-material/AccessTime";
 
 export default function RunScan() {
   return (
@@ -56,8 +52,6 @@ export default function RunScan() {
             Scan Configuration
           </Typography>
 
-          {/* Scan Scope */}
-
           <div className="mb-6">
 
             <p className="mb-2 font-semibold">
@@ -66,9 +60,8 @@ export default function RunScan() {
 
             <FormControl fullWidth>
 
-              <Select
-                defaultValue="all"
-              >
+              <Select defaultValue="all">
+
                 <MenuItem value="all">
                   All Environments
                 </MenuItem>
@@ -91,8 +84,6 @@ export default function RunScan() {
 
           </div>
 
-          {/* IaC Type */}
-
           <div className="mb-6">
 
             <p className="mb-2 font-semibold">
@@ -101,9 +92,8 @@ export default function RunScan() {
 
             <FormControl fullWidth>
 
-              <Select
-                defaultValue="all"
-              >
+              <Select defaultValue="all">
+
                 <MenuItem value="all">
                   Terraform + Bicep + ARM
                 </MenuItem>
@@ -133,6 +123,7 @@ export default function RunScan() {
             <div className="flex justify-between items-center">
 
               <div>
+
                 <h3 className="font-semibold">
                   Ignore Transient Drift
                 </h3>
@@ -140,6 +131,7 @@ export default function RunScan() {
                 <p className="text-gray-500 text-sm">
                   Ignore temporary VMSS/AKS changes
                 </p>
+
               </div>
 
               <Switch defaultChecked />
@@ -149,6 +141,7 @@ export default function RunScan() {
             <div className="flex justify-between items-center">
 
               <div>
+
                 <h3 className="font-semibold">
                   Include User Attribution
                 </h3>
@@ -156,6 +149,7 @@ export default function RunScan() {
                 <p className="text-gray-500 text-sm">
                   Detect who changed Azure resources
                 </p>
+
               </div>
 
               <Switch defaultChecked />
@@ -165,6 +159,7 @@ export default function RunScan() {
             <div className="flex justify-between items-center">
 
               <div>
+
                 <h3 className="font-semibold">
                   Deep Comparison Mode
                 </h3>
@@ -172,6 +167,7 @@ export default function RunScan() {
                 <p className="text-gray-500 text-sm">
                   Perform full state validation
                 </p>
+
               </div>
 
               <Switch />
@@ -179,8 +175,6 @@ export default function RunScan() {
             </div>
 
           </div>
-
-          {/* BUTTON */}
 
           <Button
             variant="contained"
@@ -289,9 +283,121 @@ export default function RunScan() {
 
           </div>
 
+          {/* PIPELINE STATUS */}
+
+          <div className="mt-10">
+
+            <Typography
+              variant="h5"
+              fontWeight="bold"
+              mb={3}
+            >
+              Processing Pipeline
+            </Typography>
+
+            <div className="space-y-4">
+
+              <div className="flex justify-between">
+                <span>Blob Storage</span>
+                <span className="text-green-600">
+                  Connected
+                </span>
+              </div>
+
+              <div className="flex justify-between">
+                <span>Message Queue</span>
+                <span>
+                  5 Pending
+                </span>
+              </div>
+
+              <div className="flex justify-between">
+                <span>Ollama Engine</span>
+                <span className="text-green-600">
+                  Running
+                </span>
+              </div>
+
+              <div className="flex justify-between">
+                <span>Notification Service</span>
+                <span className="text-green-600">
+                  Healthy
+                </span>
+              </div>
+
+            </div>
+
+          </div>
+
         </Card>
 
       </div>
+
+      {/* ARCHITECTURE FLOW */}
+
+      <Card className="p-8 mt-8">
+
+        <Typography
+          variant="h4"
+          fontWeight="bold"
+          mb={4}
+        >
+          Drift Detection Workflow
+        </Typography>
+
+        <div
+          className="
+          flex
+          flex-wrap
+          items-center
+          justify-center
+          gap-4
+        "
+        >
+
+          <div className="bg-orange-100 px-5 py-3 rounded-lg font-semibold">
+            GitHub / GitLab
+          </div>
+
+          <span>→</span>
+
+          <div className="bg-blue-100 px-5 py-3 rounded-lg font-semibold">
+            Blob Storage
+          </div>
+
+          <span>→</span>
+
+          <div className="bg-yellow-100 px-5 py-3 rounded-lg font-semibold">
+            Activity Function
+          </div>
+
+          <span>→</span>
+
+          <div className="bg-purple-100 px-5 py-3 rounded-lg font-semibold">
+            Message Queue
+          </div>
+
+          <span>→</span>
+
+          <div className="bg-green-100 px-5 py-3 rounded-lg font-semibold">
+            Ollama Engine
+          </div>
+
+          <span>→</span>
+
+          <div className="bg-cyan-100 px-5 py-3 rounded-lg font-semibold">
+            Table Storage
+          </div>
+
+          <span>→</span>
+
+          <div className="bg-red-100 px-5 py-3 rounded-lg font-semibold">
+            Notification Service
+          </div>
+
+        </div>
+
+      </Card>
 
     </div>
   );

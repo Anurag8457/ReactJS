@@ -7,6 +7,8 @@ import StorageIcon from "@mui/icons-material/Storage";
 import PsychologyIcon from "@mui/icons-material/Psychology";
 import SecurityIcon from "@mui/icons-material/Security";
 import SettingsIcon from "@mui/icons-material/Settings";
+import HubIcon from "@mui/icons-material/Hub";
+import NotificationsIcon from "@mui/icons-material/Notifications";
 export const drawerWidth = 260;
 import {
   Drawer,
@@ -49,6 +51,17 @@ const menuItems = [
     text: "Governance",
     icon: <SecurityIcon />,
     path: "/governance",
+  },
+
+  {
+    text: "Operations",
+    icon: <HubIcon />,
+    path: "/operations",
+  },
+  {
+    text: "Notifications",
+    icon: <NotificationsIcon />,
+    path: "/notifications",
   },
   {
     text: "Settings",

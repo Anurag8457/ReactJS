@@ -1,7 +1,8 @@
 import { Routes, Route } from "react-router-dom";
 
 import MainLayout from "../components/layout/MainLayout";
-
+import Operations from "../pages/Operations";
+import Notifications from "../pages/Notifications";
 import Dashboard from "../pages/Dashboard";
 import RunScan from "../pages/RunScan";
 import Reports from "../pages/Reports";
@@ -41,6 +42,15 @@ export default function AppRoutes() {
         <Route
           path="/governance"
           element={<Governance />}
+        />
+        <Route
+          path="/operations"
+          element={<Operations />}
+        />
+
+        <Route
+          path="/notifications"
+          element={<Notifications />}
         />
 
         <Route
