@@ -4,7 +4,7 @@ import Left_content from './Left_content'
 
 const Page1Content = () => {
   return (
-    <div className='h-full flex items-center justify-between'>
+    <div className='h-full flex items-center justify-between mr-6 ml-6'>
       <Left_content />
       <Right_content />
     </div>

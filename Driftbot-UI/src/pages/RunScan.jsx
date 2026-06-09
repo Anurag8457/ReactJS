@@ -44,7 +44,7 @@ export default function RunScan() {
 
         <Card className="p-8">
 
-          <Typography
+          {/* <Typography
             variant="h4"
             fontWeight="bold"
             mb={4}
@@ -114,7 +114,7 @@ export default function RunScan() {
 
             </FormControl>
 
-          </div>
+          </div> */}
 
           {/* SWITCHES */}
 

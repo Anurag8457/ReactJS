@@ -75,13 +75,13 @@ export default function Reports() {
             </Select>
           </FormControl>
 
-          <FormControl fullWidth>
+          {/* <FormControl fullWidth>
             <Select defaultValue="all">
               <MenuItem value="all">
                 All IaC Types
               </MenuItem>
             </Select>
-          </FormControl>
+          </FormControl> */}
 
           <TextField
             type="date"
