@@ -1,7 +1,4 @@
 
-
-// pages/Reports.jsx
-
 import {
   Card,
   Button,
