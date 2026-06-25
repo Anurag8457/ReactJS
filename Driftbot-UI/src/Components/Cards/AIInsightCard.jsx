@@ -101,8 +101,9 @@ export default function AIInsightCard({
 
         <Button
           variant="contained"
+          color="success"
         >
-          Create Ticket
+          Apply Fix
         </Button>
 
       </div>
