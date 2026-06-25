@@ -1,9 +1,39 @@
 
 import AIInsightCard from "../components/cards/AIInsightCard";
-
 import { Card } from "@mui/material";
+import axios from "axios";
+import { useState, useEffect } from "react";
+import { fetchAiInsights, fetchAiInsightsById} from '../Services/AiInsightsApi';
+
 
 export default function AIInsights() {
+  const [loading, setLoading] = useState(false);
+  const [responseMsg, setResponseMsg] = useState(null);
+  const [aiinsights, setAiInsights] = useState(null);
+
+  const [users, setUsers] = useState({});
+
+  useEffect(() => {
+
+    async function fetchAiInsightsData() {
+      try {
+        const fetchedData = await fetchAiInsights();
+        console.log("ai insights", fetchedData);
+        setAiInsights(fetchedData.data);
+
+      } catch (error) {
+        console.error("Failed to fetch or process data", error);
+        setAiInsights([]);
+        fetchAiInsights(null);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchAiInsightsData();
+
+  }, []);
+
   return (
     <div>
 
