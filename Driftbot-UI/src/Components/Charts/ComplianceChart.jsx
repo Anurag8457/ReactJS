@@ -9,19 +9,19 @@ import {
   Tooltip,
 } from "recharts";
 
-const data = [
-  { month: "Jan", compliance: 78 },
-  { month: "Feb", compliance: 82 },
-  { month: "Mar", compliance: 79 },
-  { month: "Apr", compliance: 85 },
-  { month: "May", compliance: 88 },
-  { month: "Jun", compliance: 85 },
-];
+// const data = [
+//   { month: "Jan", compliance: 78 },
+//   { month: "Feb", compliance: 82 },
+//   { month: "Mar", compliance: 79 },
+//   { month: "Apr", compliance: 85 },
+//   { month: "May", compliance: 88 },
+//   { month: "Jun", compliance: 85 },
+// ];
 
-export default function ComplianceChart() {
+export default function ComplianceChart({complianceData}) {
   return (
     <ResponsiveContainer width="100%" height={350}>
-      <AreaChart data={data}>
+      <AreaChart data={complianceData}>
         <XAxis dataKey="month" />
         <YAxis />
         <Tooltip />

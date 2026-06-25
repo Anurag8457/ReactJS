@@ -5,25 +5,7 @@ import {
   Tooltip,
   ResponsiveContainer
 } from "recharts";
-
-const data = [
-  {
-    name: "Critical",
-    value: 20
-  },
-  {
-    name: "High",
-    value: 40
-  },
-  {
-    name: "Medium",
-    value: 25
-  },
-  {
-    name: "Low",
-    value: 15
-  }
-];
+import { fetchDriftTrend } from '../../Services/DashboardApi';
 
 const COLORS = [
   "#ef4444",
@@ -32,7 +14,7 @@ const COLORS = [
   "#10b981"
 ];
 
-export default function SeverityChart() {
+export default function SeverityChart({severityData}) {
   return (
     <ResponsiveContainer
       width="100%"
@@ -41,12 +23,13 @@ export default function SeverityChart() {
       <PieChart>
 
         <Pie
-          data={data}
+          data={severityData}
           innerRadius={80}
           outerRadius={130}
           dataKey="value"
+          label
         >
-          {data.map((entry, index) => (
+          {severityData.map((entry, index) => (
             <Cell
               key={index}
               fill={COLORS[index]}
