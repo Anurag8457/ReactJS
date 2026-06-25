@@ -75,7 +75,7 @@ const rows = [
   },
 ];
 
-export default function GovernanceTable() {
+export default function GovernanceTable({governanceTableData}) {
   return (
     <div style={{ height: 400 }}>
       <DataGrid
