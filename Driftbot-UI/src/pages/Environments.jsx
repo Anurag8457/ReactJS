@@ -1,5 +1,7 @@
 
 import EnvironmentCard from "../components/cards/EnvironmentCard";
+import { useState, useEffect } from "react";
+import { fetchEnvironments, fetchEnvironmentSubscriptions } from '../Services/EnvironmentsApi';
 
 import {
   Card,
@@ -7,32 +9,42 @@ import {
 } from "@mui/material";
 
 export default function Environment() {
+  const [loading, setLoading] = useState(true);
+  const [environments, setEnvironments] = useState(null);
+  const [environmentSubscription, setEnvironmentSubscription] = useState(null);
+
+   useEffect(() => {
+      fetchEnvironments().then(data => {
+        setEnvironments(data.data);
+        console.log("environments", data);
+      });
+      // fetchEnvironmentSubscriptions().then(data => {
+      //   // setEnvironmentSubscription(data.data);
+      //   console.log("environment Subscriptions",data);
+      // });
+      setTimeout(() => {
+        setLoading(false);
+      }, 100);
+  
+    }, []);
+
   return (
     <div>
-
-      {/* HEADER */}
-
       <div className="flex justify-between items-center mb-8">
-
         <div>
-
           <h1 className="text-5xl font-bold">
             Environments
           </h1>
-
           <p className="text-gray-500 mt-2">
             Monitor health and compliance
             across Azure landing zones
           </p>
-
         </div>
-
         <Button
-          variant="contained"
+          variant="contained" className="text-orange-500"
         >
           Refresh Status
         </Button>
-
       </div>
 
       {/* SUMMARY CARDS */}
