@@ -34,8 +34,8 @@ const columns = [
           params.value === "Critical"
             ? "error"
             : params.value === "High"
-            ? "warning"
-            : "success"
+              ? "warning"
+              : "success"
         }
       />
     ),
@@ -70,6 +70,15 @@ const columns = [
         <Button
           size="small"
           variant="outlined"
+          sx={{
+            color: 'var(--color-orange-500) !important',
+            borderColor: 'var(--color-orange-500) !important',
+            '&:hover': {
+              backgroundColor: 'var(--color-orange-500) !important',
+              color: 'white !important',
+              borderColor: 'var(--color-orange-500) !important',
+            },
+          }}
         >
           Diff
         </Button>
@@ -77,6 +86,13 @@ const columns = [
         <Button
           size="small"
           variant="contained"
+          sx={{
+            backgroundColor: 'var(--color-orange-500) !important',
+            color: 'white !important',
+            '&:hover': {
+              backgroundColor: 'var(--color-orange-500)!important',
+            },
+          }}
         >
           Ticket
         </Button>
