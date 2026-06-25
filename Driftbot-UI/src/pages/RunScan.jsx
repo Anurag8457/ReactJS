@@ -9,8 +9,15 @@ import {
 } from "@mui/material";
 
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
+import { runScan } from '../Services/RunScanApi';
 
 export default function RunScan() {
+  const handleClick = async () => {
+    const response = await runScan();
+    console.log("run scan ", response);
+  }
+
+    
   return (
     <div>
 
@@ -18,7 +25,7 @@ export default function RunScan() {
 
       <div className="mb-8">
 
-        <h1 className="text-5xl font-bold">
+        <h1 className="text-5xl font-bold ">
           Run Drift Scan
         </h1>
 
@@ -43,8 +50,8 @@ export default function RunScan() {
         {/* LEFT CARD */}
 
         <Card className="p-8">
-
-          {/* <Typography
+{/* 
+          <Typography
             variant="h4"
             fontWeight="bold"
             mb={4}
@@ -134,7 +141,17 @@ export default function RunScan() {
 
               </div>
 
-              <Switch defaultChecked />
+              <Switch 
+              defaultChecked 
+              sx={{
+                    '& .MuiSwitch-switchBase.Mui-checked': {
+                      color: '#4caf50', // Thumb color when checked
+                    },
+                    '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
+                      backgroundColor: '#81c784', // Track color when checked
+                    },
+                  }}
+              />
 
             </div>
 
@@ -152,7 +169,17 @@ export default function RunScan() {
 
               </div>
 
-              <Switch defaultChecked />
+              <Switch 
+              defaultChecked 
+              sx={{
+                    '& .MuiSwitch-switchBase.Mui-checked': {
+                      color: '#4caf50', // Thumb color when checked
+                    },
+                    '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
+                      backgroundColor: '#81c784', // Track color when checked
+                    },
+                  }}
+              />
 
             </div>
 
@@ -170,7 +197,16 @@ export default function RunScan() {
 
               </div>
 
-              <Switch />
+              <Switch 
+              sx={{
+                    '& .MuiSwitch-switchBase.Mui-checked': {
+                      color: '#4caf50', // Thumb color when checked
+                    },
+                    '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
+                      backgroundColor: '#81c784', // Track color when checked
+                    },
+                  }}
+              />
 
             </div>
 
@@ -185,7 +221,9 @@ export default function RunScan() {
               py: 2,
               width: "100%",
               borderRadius: "12px",
+              backgroundColor: 'var(--color-orange-500)'
             }}
+            onClick={handleClick}
           >
             Start Drift Scan
           </Button>
