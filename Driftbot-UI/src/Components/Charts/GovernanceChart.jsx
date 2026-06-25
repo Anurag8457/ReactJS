@@ -7,19 +7,19 @@ import {
   Tooltip,
 } from "recharts";
 
-const data = [
-  { month: "Jan", score: 72 },
-  { month: "Feb", score: 76 },
-  { month: "Mar", score: 80 },
-  { month: "Apr", score: 84 },
-  { month: "May", score: 88 },
-  { month: "Jun", score: 92 },
-];
+// const data = [
+//   { month: "Jan", score: 72 },
+//   { month: "Feb", score: 76 },
+//   { month: "Mar", score: 80 },
+//   { month: "Apr", score: 84 },
+//   { month: "May", score: 88 },
+//   { month: "Jun", score: 92 },
+// ];
 
-export default function GovernanceChart() {
+export default function GovernanceChart({governanceData}) {
   return (
     <ResponsiveContainer width="100%" height={350}>
-      <LineChart data={data}>
+      <LineChart data={governanceData}>
         <XAxis dataKey="month" />
         <YAxis />
         <Tooltip />
