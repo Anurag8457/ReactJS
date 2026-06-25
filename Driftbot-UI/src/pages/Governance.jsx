@@ -1,10 +1,205 @@
 
 import { Card } from "@mui/material";
-
 import GovernanceChart from "../components/charts/GovernanceChart";
 import GovernanceTable from "../components/tables/GovernanceTable";
+import axios from "axios";
+import { useState, useEffect } from "react";
+import { fetchGovernanceOverview, fetchGovernanceSubscriptions, fetchGovernanceRisk } from '../Services/GovernanceApi';
+
 
 export default function Governance() {
+  const [loading, setLoading] = useState(false);
+  const [responseMsg, setResponseMsg] = useState(null);
+  const [monthlyCompliance, setMonthlyCompliance] = useState([]);
+  const [governanceOverview, setGovernanceOverview] = useState(null);
+  const [governanceSubscriptions, setGovernanceSubscriptions] = useState(null);
+  const [governanceRisk, setGovernanceRisk] = useState(null);
+
+  useEffect(() => {
+    async function fetchAndProcessData() {
+      try {
+        const fetchedData = await fetchGovernanceSubscriptions();
+
+        const dataArray = Array.isArray(fetchedData.data) ? fetchedData.data : [];
+        if (!Array.isArray(fetchedData.data)) {
+          console.warn("Expected data.data to be an array", fetchedData.data);
+        }
+        setGovernanceSubscriptions(fetchedData.data); // Keep original regardless
+
+        const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+        const grouped = dataArray.reduce((acc, item) => {
+          const date = new Date(item.lastScanTime);
+          if (isNaN(date)) return acc;
+
+          const monthIndex = date.getMonth();
+
+          if (!acc[monthIndex]) acc[monthIndex] = [];
+          acc[monthIndex].push(item.complianceScore);
+
+          return acc;
+        }, {});
+
+        const formatted = Object.entries(grouped).map(([monthIndex, scores]) => ({
+          month: monthNames[monthIndex],
+          score: Math.round(scores.reduce((a, b) => a + b, 0) / scores.length),
+        }));
+
+        setMonthlyCompliance(formatted);
+        console.log("formatted", formatted);
+      } catch (error) {
+        console.error("Failed to fetch or process data", error);
+        setMonthlyCompliance([]);
+        fetchGovernanceSubscriptions(null);
+      } finally {
+        setLoading(false);
+      }
+    }
+    async function fetchGovernanceOverviewData() {
+      try {
+        const fetchedData = await fetchGovernanceOverview();
+        console.log("governance overview", fetchedData);
+        setGovernanceOverview(fetchedData.data);
+
+      } catch (error) {
+        console.error("Failed to fetch or process data", error);
+        setGovernanceOverview([]);
+        fetchGovernanceOverview(null);
+      } finally {
+        setLoading(false);
+      }
+    }
+    async function fetchGovernanceRiskData() {
+      try {
+        const fetchedData = await fetchGovernanceRisk();
+        console.log("governance risk", fetchedData);
+        setGovernanceRisk(fetchedData.data);
+
+      } catch (error) {
+        console.error("Failed to fetch or process data", error);
+        setGovernanceRisk([]);
+        fetchGovernanceRisk(null);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchAndProcessData();
+    fetchGovernanceOverviewData();
+    fetchGovernanceRiskData();
+
+  }, []);
+
+  //  const fetchGovernanceOverview = async () => {
+  //   try {
+  //     const response = await axios.get('/api/governance/overview');
+  //     setGovernanceOverview(response.data);
+  //   } catch (error) {
+  //     console.error('Error fetching overview:', error);
+  //   }
+  // };
+
+  // const fetchPolicyCompliance = async () => {
+  //   try {
+  //     const response = await axios.get('/api/governance/policy-compliance');
+  //     setPolicyCompliance(response.data);
+  //   } catch (error) {
+  //     console.error('Error fetching overview:', error);
+  //   }
+  // };
+
+  //  const fetchActiveViolation = async () => {
+  //   try {
+  //     const response = await axios.get('/api/governance/active-violations');
+  //     setActiveViolations(response.data);
+  //   } catch (error) {
+  //     console.error('Error fetching overview:', error);
+  //   }
+  // };
+
+  // const createRemediationAction = async () => {
+  //   const requestBody = {
+  //     "remediationComment": "Auto-remediation triggered via UI"
+  //   };
+  //   try {
+  //     const response = await axios.post('/api/governance/violation/{id}/remediate', requestBody);
+  //     setResponseMsg(response.message);
+  //     setremediationData(response.data)
+  //   } catch (error) {
+  //    setErrorMsg(
+  //       error.response?.data?.error || 'Failed to create Remediation action. Please try again.'
+  //     );
+  //   }
+  // };
+
+  // const fetchGovernancePolicies = async () => {
+  //   try {
+  //     const response = await axios.get('/api/governance/policies');
+  //     setGovernancePolicies(response.data);
+  //   } catch (error) {
+  //     console.error('Error fetching overview:', error);
+  //   }
+  // };
+
+  // const fetchGovernancePolicyById = async () => {
+  //   try {
+  //     const response = await axios.get('/api/governance/policy/{id}');
+  //     setGovernancePolicyByID(response.data);
+  //   } catch (error) {
+  //     console.error('Error fetching overview:', error);
+  //   }
+  // };
+
+  //  const createGovernancePolicy = async () => {
+  //   const requestBody = {
+  //     "name": "Require MFA for Admin Access",
+  //     "category": "Identity",
+  //     "description": "Ensure MFA is enabled for all admin accounts",
+  //     "rules": [
+  //       {
+  //         "type": "enforce",
+  //         "resourceType": "User",
+  //         "condition": "mfa_enabled == true"
+  //       }
+  //     ],
+  //     "enabled": true
+  //   };
+  //   try {
+  //     const response = await axios.post('/api/governance/policy', requestBody);
+  //     setResponseMsg(response.message);
+  //     setGovernancePolicy(response.data)
+  //   } catch (error) {
+  //    setErrorMsg(
+  //       error.response?.data?.error || 'Failed to create Governance Policy. Please try again.'
+  //     );
+  //   }
+  // };
+
+  // const updateGovernancePolicy = async () => {
+  //   const requestBody = {
+  //     "name": "Require MFA for Admin & Power Users",
+  //     "description": "Ensure MFA is enabled for all admin and power users",
+  //     "enabled": true
+  //   }
+  //   try {
+  //     const response = await axios.put('/api/governance/policy/{id}', requestBody);
+  //     setResponseMsg(response.message);
+  //     setupdatedPolicy(response.data)
+  //   } catch (error) {
+  //    setErrorMsg(
+  //       error.response?.data?.error || 'Failed to create Governance Policy. Please try again.'
+  //     );
+  //   }
+  // };
+
+  //  const deletePolicyById = async () => {
+  //   try {
+  //     const response = await axios.delete('/api/governance/policy/{id}');
+  //     setResponseMsg(response.message);
+  //   } catch (error) {
+  //     console.error('Error deleting policy:', error);
+  //   }
+  // };
+
   return (
     <div>
 
@@ -41,7 +236,7 @@ export default function Governance() {
           </p>
 
           <h2 className="text-4xl font-bold text-green-600">
-            92%
+            {governanceOverview ? governanceOverview.complianceScore+"%" : "NA"}
           </h2>
         </Card>
 
@@ -51,7 +246,7 @@ export default function Governance() {
           </p>
 
           <h2 className="text-4xl font-bold text-red-500">
-            8
+            {governanceOverview ? governanceOverview.activeDrifts : "NA"}
           </h2>
         </Card>
 
@@ -85,7 +280,7 @@ export default function Governance() {
           Governance Trend
         </h2>
 
-        <GovernanceChart />
+        <GovernanceChart governanceData={monthlyCompliance} />
 
       </Card>
 
@@ -97,7 +292,7 @@ export default function Governance() {
           Policy Violations
         </h2>
 
-        <GovernanceTable />
+        <GovernanceTable governanceTableData={governanceRisk} />
 
       </Card>
 
